@@ -1,29 +1,697 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import heroImg from "@/assets/hero.jpg";
+import weaveImg from "@/assets/weave.jpg";
+import stageImg from "@/assets/stage.jpg";
+import vocalistImg from "@/assets/vocalist.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Sauti Aziz Band — Precious Voice. Powerful Purpose." },
+      { name: "description", content: "A 14-voice Afro-Fusion collective from Chuka, Kenya. Music, storytelling and youth empowerment — from Africa to the world." },
+      { property: "og:title", content: "Sauti Aziz Band — Precious Voice. Powerful Purpose." },
+      { property: "og:description", content: "A 14-voice Afro-Fusion collective from Chuka, Kenya. Africa to the world." },
+      { property: "og:url", content: "/" },
     ],
+    links: [{ rel: "canonical", href: "/" }],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const NAV = [
+  { id: "story", label: "Story" },
+  { id: "sound", label: "Sound" },
+  { id: "collective", label: "Collective" },
+  { id: "timeline", label: "Journey" },
+  { id: "sazfest", label: "SAZ Fest" },
+  { id: "book", label: "Book" },
+];
+
+const LEADERSHIP = [
+  ["Joseph Mwangi", "President & Co-Founder"],
+  ["Samuel Odanga", "Chairperson"],
+  ["Catherine Mariba", "Deputy Chairperson"],
+  ["Joseph Muhia Buya", "Music Director"],
+  ["Michael Kamau Munyua", "Lead Vocalist"],
+  ["Alex Kamau", "Secretary"],
+  ["Grace Njoroge Mumbi", "Treasurer"],
+  ["Peter Mukungi", "Disciplinary Officer"],
+];
+
+const COLLECTIVE = [
+  { name: "Joseph Mwangi", role: "Vocals · Founder", field: "Law" },
+  { name: "Michael Kamau Munyua", role: "Lead Vocals", field: "Communication" },
+  { name: "Peter Mukungi", role: "Vocals · Discipline", field: "Engineering" },
+  { name: "Grace Njoroge Mumbi", role: "Vocals", field: "Commerce" },
+  { name: "Claire Omondi", role: "Vocals", field: "Psychology" },
+  { name: "George Kihara", role: "Instrumentalist", field: "Computer Science" },
+  { name: "Pamelah Shekinah", role: "Vocals", field: "Nursing" },
+  { name: "Samuel Odanga", role: "Vocals · Chair", field: "Economics" },
+  { name: "Catherine Mariba", role: "Vocals", field: "Statistics" },
+  { name: "Joseph Muhia Buya", role: "Music Director", field: "Physics" },
+  { name: "Janice Kipkiror", role: "Vocals", field: "Linguistics" },
+  { name: "Alex Githinji", role: "Vocals · Secretary", field: "Law" },
+  { name: "Cherotich Kilel", role: "Vocals", field: "Psychology" },
+  { name: "Sammy Ogejo", role: "Instrumentalist", field: "Engineering" },
+];
+
+const TIMELINE = [
+  { year: "2021", title: "Founded in Chuka", body: "Joseph Mwangi and fellow musicians turn informal jam sessions into a movement." },
+  { year: "2021", title: "First University Stages", body: "Debut performances introduce the collective to Kenya's campus audiences." },
+  { year: "2022", title: "Safaricom Hook Circle", body: "A breakout appearance places Sauti Aziz on the national radar." },
+  { year: "2023", title: "Major Cover Releases", body: "A wave of releases earns the band a dedicated digital following." },
+  { year: "2023", title: "Sina Noma — 1M+ Engagements", body: "The Sina Noma cover crosses one million views and engagements." },
+  { year: "2024", title: "TV47 Feature", body: "National broadcast spotlight expands reach across East Africa." },
+  { year: "2024", title: "Regional Festival Tour", body: "Bookings expand from campus shows to regional festivals." },
+  { year: "2025", title: "Original Music Era", body: "The collective steps into a new chapter — original songs, original stories." },
+];
+
+const GENRES = ["Afrobeat", "Afro Soul", "Afro Fusion", "Acoustic", "R&B", "Spoken Word", "Contemporary African Pop", "Amapiano"];
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
+    <div className="min-h-dvh bg-background text-foreground">
+      <Nav />
+      <main>
+        <Hero />
+        <Marquee />
+        <Story />
+        <Mission />
+        <Sound />
+        <Collective />
+        <Leadership />
+        <Timeline />
+        <Showcase />
+        <SazFest />
+        <Booking />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 24);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+  return (
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        scrolled ? "bg-background/85 backdrop-blur-md border-b border-border" : "bg-transparent"
+      }`}
     >
+      <div className="container-x flex h-16 items-center justify-between md:h-20">
+        <a href="#top" className="group flex items-center gap-3">
+          <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-full bg-forest text-cream">
+            <span className="font-display text-lg leading-none">SA</span>
+            <span className="absolute inset-0 rounded-full ring-1 ring-gold/60" />
+          </span>
+          <span className="hidden flex-col leading-tight sm:flex">
+            <span className="font-display text-base text-foreground">Sauti Aziz</span>
+            <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">Precious Voice</span>
+          </span>
+        </a>
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
+          {NAV.map((n) => (
+            <a
+              key={n.id}
+              href={`#${n.id}`}
+              className="group relative text-sm text-foreground/80 transition hover:text-foreground"
+            >
+              {n.label}
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
+            </a>
+          ))}
+        </nav>
+        <a
+          href="#book"
+          className="hidden rounded-full bg-forest px-5 py-2.5 text-sm text-cream transition hover:bg-forest-deep md:inline-flex"
+        >
+          Book the band
+        </a>
+        <button
+          aria-label="Toggle menu"
+          onClick={() => setOpen((o) => !o)}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border md:hidden"
+        >
+          <span className="relative block h-3 w-5">
+            <span className={`absolute inset-x-0 top-0 h-px bg-foreground transition ${open ? "translate-y-1.5 rotate-45" : ""}`} />
+            <span className={`absolute inset-x-0 bottom-0 h-px bg-foreground transition ${open ? "-translate-y-1.5 -rotate-45" : ""}`} />
+          </span>
+        </button>
+      </div>
+      {open && (
+        <div className="border-t border-border bg-background md:hidden">
+          <div className="container-x flex flex-col gap-1 py-4">
+            {NAV.map((n) => (
+              <a key={n.id} href={`#${n.id}`} onClick={() => setOpen(false)} className="rounded-md px-2 py-3 text-base text-foreground">
+                {n.label}
+              </a>
+            ))}
+            <a href="#book" onClick={() => setOpen(false)} className="mt-2 rounded-full bg-forest px-5 py-3 text-center text-sm text-cream">
+              Book the band
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section id="top" className="relative isolate min-h-dvh overflow-hidden bg-night text-cream">
       <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+        src={heroImg}
+        alt="Sauti Aziz Band performing on stage in warm stage light"
+        width={1920}
+        height={1080}
+        fetchPriority="high"
+        className="absolute inset-0 h-full w-full object-cover opacity-70"
       />
+      <div className="absolute inset-0 bg-gradient-to-b from-night/70 via-night/40 to-night" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-night to-transparent" />
+
+      <div className="container-x relative z-10 flex min-h-dvh flex-col justify-between pb-12 pt-32 md:pt-40">
+        <div className="flex items-center gap-3 animate-rise">
+          <span className="h-px w-10 bg-gold" />
+          <span className="eyebrow !text-gold-soft">Chuka, Kenya · Est. 2021</span>
+        </div>
+
+        <div className="max-w-5xl animate-rise" style={{ animationDelay: "0.15s" }}>
+          <h1 className="font-display text-[clamp(3rem,10vw,9rem)] leading-[0.92] tracking-tight">
+            Precious <em className="italic text-gold">Voice.</em>
+            <br />
+            Powerful Purpose.
+          </h1>
+          <p className="mt-8 max-w-xl text-base text-cream/75 md:text-lg">
+            Fourteen voices. One sound. A Kenyan Afro-Fusion collective bringing
+            music, story and movement from Africa to the world.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <a
+              href="#sound"
+              className="group inline-flex items-center gap-3 rounded-full bg-gold px-7 py-4 text-sm font-medium text-night transition hover:bg-gold-soft"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-shimmer rounded-full bg-night/60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-night" />
+              </span>
+              Hear Us
+            </a>
+            <a
+              href="#story"
+              className="inline-flex items-center gap-2 rounded-full border border-cream/30 px-7 py-4 text-sm text-cream transition hover:border-cream"
+            >
+              Our Story <span aria-hidden>→</span>
+            </a>
+          </div>
+        </div>
+
+        <div className="mt-16 grid grid-cols-2 gap-6 border-t border-cream/15 pt-8 sm:grid-cols-4">
+          {[
+            ["14", "Voices"],
+            ["1M+", "Engagements"],
+            ["10+", "Disciplines"],
+            ["2021", "Founded"],
+          ].map(([k, v]) => (
+            <div key={v}>
+              <div className="font-display text-3xl text-gold md:text-4xl">{k}</div>
+              <div className="mt-1 text-[11px] uppercase tracking-[0.25em] text-cream/55">{v}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Marquee() {
+  const words = ["Africa To The World", "Precious Voice", "Powerful Purpose", "Sauti Aziz", "Afro-Fusion", "Chuka · Kenya"];
+  return (
+    <div className="overflow-hidden border-y border-border bg-forest py-6 text-cream">
+      <div className="flex w-max animate-marquee gap-16 whitespace-nowrap">
+        {[...words, ...words, ...words].map((w, i) => (
+          <span key={i} className="flex items-center gap-16 font-display text-3xl md:text-5xl">
+            {w}
+            <span className="text-gold">✦</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Section({
+  id,
+  eyebrow,
+  title,
+  children,
+  className = "",
+}: {
+  id?: string;
+  eyebrow?: string;
+  title?: React.ReactNode;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <section id={id} className={`relative py-24 md:py-36 ${className}`}>
+      <div className="container-x">
+        {(eyebrow || title) && (
+          <header className="mb-14 max-w-3xl md:mb-20">
+            {eyebrow && <div className="eyebrow mb-5">{eyebrow}</div>}
+            {title && (
+              <h2 className="font-display text-4xl leading-[1.05] tracking-tight md:text-6xl">{title}</h2>
+            )}
+          </header>
+        )}
+        {children}
+      </div>
+    </section>
+  );
+}
+
+function Story() {
+  return (
+    <Section
+      id="story"
+      eyebrow="01 — Origin"
+      title={
+        <>
+          Born from a jam session in <span className="text-forest">Chuka</span>,
+          shaped by the conviction that music can heal.
+        </>
+      }
+    >
+      <div className="grid gap-12 md:grid-cols-12">
+        <div className="space-y-6 text-lg leading-relaxed text-foreground/80 md:col-span-7">
+          <p>
+            In 2021, Joseph Mwangi and a small circle of musicians began meeting
+            in Chuka, Tharaka-Nithi County. There were no contracts. No label.
+            Only a question — what if our voices could carry something more than a melody?
+          </p>
+          <p>
+            From those informal sessions, <em className="text-foreground">Sauti Aziz</em> — Precious
+            Voice — took shape. A platform for young African creatives to write,
+            perform and produce music that resonates across generations.
+          </p>
+          <p>
+            Four years on, Sauti Aziz has grown into one of Kenya's most promising
+            emerging collectives — fourteen voices, ten disciplines, one sound.
+          </p>
+        </div>
+        <div className="relative md:col-span-5">
+          <div className="aspect-[4/5] overflow-hidden rounded-sm">
+            <img src={vocalistImg} alt="Sauti Aziz vocalist" loading="lazy" width={1200} height={1500} className="h-full w-full object-cover" />
+          </div>
+          <div className="absolute -bottom-6 -left-6 hidden h-32 w-32 weave-bg md:block" aria-hidden />
+          <figcaption className="mt-4 text-xs uppercase tracking-[0.25em] text-muted-foreground">
+            The voice — the instrument we build everything around.
+          </figcaption>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+function Mission() {
+  const values = [
+    ["Craft", "We treat each performance as a body of work. Nothing accidental."],
+    ["Culture", "We carry East African story, sound and texture into every room we enter."],
+    ["Community", "We build platforms for young creatives to grow alongside us."],
+    ["Conviction", "We sing about life as we have lived it. Honest. Joyful. Whole."],
+  ];
+  return (
+    <section className="bg-ink py-24 text-cream md:py-36">
+      <div className="container-x grid gap-16 md:grid-cols-12">
+        <div className="md:col-span-5">
+          <div className="eyebrow mb-5">02 — Mission</div>
+          <h2 className="font-display text-4xl leading-[1.05] tracking-tight md:text-5xl">
+            Music is more than entertainment. It is a celebration of life, unity and creativity.
+          </h2>
+        </div>
+        <ul className="grid gap-px bg-cream/10 md:col-span-7 md:grid-cols-2">
+          {values.map(([k, v]) => (
+            <li key={k} className="bg-ink p-8">
+              <div className="font-display text-2xl text-gold">{k}</div>
+              <p className="mt-3 text-sm leading-relaxed text-cream/70">{v}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function Sound() {
+  return (
+    <Section
+      id="sound"
+      eyebrow="03 — Musical Identity"
+      title={
+        <>
+          A sound rooted in <span className="italic text-forest">Africa</span>,
+          curious about the world.
+        </>
+      }
+    >
+      <div className="grid gap-12 md:grid-cols-12">
+        <div className="md:col-span-5">
+          <p className="text-lg leading-relaxed text-foreground/80">
+            Afrobeat meets Afro-Soul. Acoustic meets spoken word. A sound that
+            could only have grown in Kenya — informed by Fela Kuti, Brenda Fassie,
+            Sauti Sol and Bensoul, but spoken in a voice that is ours.
+          </p>
+          <div className="mt-10 flex flex-wrap gap-2">
+            {GENRES.map((g) => (
+              <span key={g} className="rounded-full border border-border bg-card px-4 py-2 text-xs uppercase tracking-[0.15em] text-foreground/70">
+                {g}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="relative md:col-span-7">
+          <div className="aspect-[16/10] overflow-hidden rounded-sm">
+            <img src={stageImg} alt="Acoustic guitar under stage light" loading="lazy" width={1600} height={1000} className="h-full w-full object-cover" />
+          </div>
+          <div className="absolute -right-4 -top-4 hidden h-24 w-24 border border-gold md:block" aria-hidden />
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+function Collective() {
+  return (
+    <Section
+      id="collective"
+      eyebrow="04 — The Collective"
+      title={<>Fourteen voices. Ten disciplines. One sound.</>}
+    >
+      <div className="grid grid-cols-2 gap-px bg-border sm:grid-cols-3 lg:grid-cols-4">
+        {COLLECTIVE.map((m, i) => (
+          <article
+            key={m.name}
+            className="group relative overflow-hidden bg-background p-6 transition hover:bg-card"
+          >
+            <div className="flex h-40 items-end">
+              <span className="font-display text-6xl text-forest/15 transition group-hover:text-forest/30">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+            </div>
+            <h3 className="font-display text-xl">{m.name}</h3>
+            <div className="mt-1 text-xs uppercase tracking-[0.2em] text-gold">{m.role}</div>
+            <div className="mt-3 text-xs text-muted-foreground">Discipline · {m.field}</div>
+          </article>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+function Leadership() {
+  return (
+    <section className="bg-muted py-24 md:py-32">
+      <div className="container-x">
+        <div className="mb-12 max-w-2xl">
+          <div className="eyebrow mb-5">05 — Leadership</div>
+          <h2 className="font-display text-3xl md:text-5xl">The team carrying the movement forward.</h2>
+        </div>
+        <div className="grid gap-x-12 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+          {LEADERSHIP.map(([name, role]) => (
+            <div key={name} className="border-t border-foreground/15 pt-5">
+              <div className="font-display text-xl">{name}</div>
+              <div className="mt-1 text-xs uppercase tracking-[0.2em] text-muted-foreground">{role}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Timeline() {
+  return (
+    <Section id="timeline" eyebrow="06 — Journey" title="Four years. One trajectory.">
+      <ol className="relative mx-auto max-w-4xl">
+        <span className="absolute left-3 top-2 h-[calc(100%-1rem)] w-px bg-border md:left-1/2" aria-hidden />
+        {TIMELINE.map((t, i) => (
+          <li key={i} className="relative grid grid-cols-1 gap-4 py-8 md:grid-cols-2 md:gap-12">
+            <span className="absolute left-3 top-10 h-2 w-2 -translate-x-1/2 rounded-full bg-gold ring-4 ring-background md:left-1/2" aria-hidden />
+            <div className={`pl-10 md:pl-0 ${i % 2 === 0 ? "md:text-right md:pr-12" : "md:order-2 md:pl-12"}`}>
+              <div className="font-display text-4xl text-forest md:text-5xl">{t.year}</div>
+            </div>
+            <div className={`pl-10 md:pl-0 ${i % 2 === 0 ? "md:pl-12" : "md:order-1 md:text-right md:pr-12"}`}>
+              <h3 className="font-display text-2xl">{t.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </Section>
+  );
+}
+
+function Showcase() {
+  const tracks = [
+    { title: "Sina Noma", meta: "Cover · 2023", note: "1M+ engagements" },
+    { title: "Africa To The World", meta: "Live Session · 2024", note: "TV47 Feature" },
+    { title: "Voices of Chuka", meta: "Acoustic · 2024", note: "Studio Session" },
+    { title: "Untitled", meta: "Original · 2025", note: "Coming soon" },
+  ];
+  return (
+    <section className="bg-night py-24 text-cream md:py-36">
+      <div className="container-x">
+        <div className="mb-14 flex flex-wrap items-end justify-between gap-6 md:mb-20">
+          <div className="max-w-2xl">
+            <div className="eyebrow mb-5">07 — Listen</div>
+            <h2 className="font-display text-4xl leading-[1.05] md:text-6xl">Press play. Stay awhile.</h2>
+          </div>
+          <a href="#book" className="text-sm text-gold underline-offset-4 hover:underline">Stream on all platforms →</a>
+        </div>
+        <ul className="divide-y divide-cream/10 border-y border-cream/10">
+          {tracks.map((t, i) => (
+            <li key={t.title} className="group flex items-center gap-6 py-6 transition hover:bg-cream/5 md:py-8">
+              <span className="w-12 font-display text-2xl text-gold md:text-3xl">{String(i + 1).padStart(2, "0")}</span>
+              <div className="flex-1">
+                <div className="font-display text-2xl md:text-3xl">{t.title}</div>
+                <div className="mt-1 text-xs uppercase tracking-[0.2em] text-cream/55">{t.meta}</div>
+              </div>
+              <div className="hidden text-sm text-cream/60 sm:block">{t.note}</div>
+              <button
+                aria-label={`Play ${t.title}`}
+                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-cream/30 text-cream transition group-hover:border-gold group-hover:text-gold"
+              >
+                ▶
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function SazFest() {
+  return (
+    <section id="sazfest" className="relative overflow-hidden bg-forest py-24 text-cream md:py-36">
+      <img src={weaveImg} alt="" loading="lazy" width={1600} height={1000} aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-15 mix-blend-overlay" />
+      <div className="container-x relative">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-7">
+            <div className="eyebrow mb-5 !text-gold-soft">08 — Flagship Initiative</div>
+            <h2 className="font-display text-5xl leading-[0.95] md:text-7xl">
+              SAZ Fest.
+              <br />
+              <em className="italic text-gold">Where the movement gathers.</em>
+            </h2>
+            <p className="mt-8 max-w-xl text-cream/80">
+              SAZ Fest is Sauti Aziz's flagship cultural platform — a meeting point
+              for music, entrepreneurship, innovation, community and youth leadership.
+              Not just a festival. A future-East-African institution being built in real time.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <a href="#book" className="rounded-full bg-gold px-6 py-3 text-sm font-medium text-night hover:bg-gold-soft">
+                Partner with SAZ Fest
+              </a>
+              <a href="#contact" className="rounded-full border border-cream/30 px-6 py-3 text-sm hover:border-cream">
+                Get notified
+              </a>
+            </div>
+          </div>
+          <ul className="space-y-px bg-cream/10 md:col-span-5">
+            {[
+              ["Music", "Live stages spotlighting emerging African talent."],
+              ["Enterprise", "A marketplace for young creative founders."],
+              ["Community", "Mentorship, workshops, conversation."],
+              ["Innovation", "Where culture meets creative technology."],
+            ].map(([k, v]) => (
+              <li key={k} className="bg-forest p-6">
+                <div className="font-display text-2xl text-gold">{k}</div>
+                <p className="mt-2 text-sm text-cream/75">{v}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Booking() {
+  const types = ["Concert / Festival", "Corporate Event", "University Show", "Private Function", "Media / Press", "Partnership"];
+  return (
+    <Section
+      id="book"
+      eyebrow="09 — Bookings"
+      title={<>Bring fourteen voices to your stage.</>}
+    >
+      <div className="grid gap-12 md:grid-cols-12">
+        <div className="md:col-span-5">
+          <p className="text-lg leading-relaxed text-foreground/80">
+            Concerts, festivals, corporate functions, university shows, community
+            activations — Sauti Aziz performs across East Africa and beyond.
+          </p>
+          <div className="mt-8 space-y-3 text-sm">
+            <div className="flex justify-between border-b border-border py-3">
+              <span className="text-muted-foreground">Based in</span>
+              <span>Chuka, Kenya</span>
+            </div>
+            <div className="flex justify-between border-b border-border py-3">
+              <span className="text-muted-foreground">Touring</span>
+              <span>East Africa & beyond</span>
+            </div>
+            <div className="flex justify-between border-b border-border py-3">
+              <span className="text-muted-foreground">Languages</span>
+              <span>English, Swahili</span>
+            </div>
+          </div>
+        </div>
+        <form
+          className="space-y-6 rounded-sm bg-card p-8 shadow-sm md:col-span-7"
+          onSubmit={(e) => {
+            e.preventDefault();
+            alert("Thank you. We'll be in touch within 48 hours.");
+          }}
+        >
+          <div className="grid gap-6 sm:grid-cols-2">
+            <Field label="Your name" name="name" />
+            <Field label="Organisation" name="org" />
+            <Field label="Email" name="email" type="email" />
+            <Field label="Phone (optional)" name="phone" />
+          </div>
+          <div>
+            <label className="eyebrow mb-2 block">Event type</label>
+            <select name="type" className="w-full rounded-sm border border-border bg-background px-4 py-3 text-sm focus:border-forest focus:outline-none">
+              {types.map((t) => <option key={t}>{t}</option>)}
+            </select>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <Field label="Event date" name="date" type="date" />
+            <Field label="City" name="city" />
+          </div>
+          <div>
+            <label className="eyebrow mb-2 block">Tell us about your event</label>
+            <textarea
+              name="message"
+              rows={4}
+              className="w-full rounded-sm border border-border bg-background px-4 py-3 text-sm focus:border-forest focus:outline-none"
+              placeholder="Audience, venue, vision…"
+            />
+          </div>
+          <button className="inline-flex items-center gap-3 rounded-full bg-forest px-7 py-4 text-sm font-medium text-cream transition hover:bg-forest-deep">
+            Send booking enquiry →
+          </button>
+        </form>
+      </div>
+    </Section>
+  );
+}
+
+function Field({ label, name, type = "text" }: { label: string; name: string; type?: string }) {
+  return (
+    <div>
+      <label htmlFor={name} className="eyebrow mb-2 block">{label}</label>
+      <input
+        id={name}
+        name={name}
+        type={type}
+        className="w-full rounded-sm border border-border bg-background px-4 py-3 text-sm focus:border-forest focus:outline-none"
+      />
+    </div>
+  );
+}
+
+function Contact() {
+  return (
+    <section id="contact" className="border-t border-border bg-muted py-20">
+      <div className="container-x grid gap-10 md:grid-cols-3">
+        <div>
+          <div className="eyebrow mb-3">Press</div>
+          <a href="mailto:press@sautiaziz.com" className="font-display text-2xl hover:text-forest">press@sautiaziz.com</a>
+        </div>
+        <div>
+          <div className="eyebrow mb-3">Bookings</div>
+          <a href="mailto:bookings@sautiaziz.com" className="font-display text-2xl hover:text-forest">bookings@sautiaziz.com</a>
+        </div>
+        <div>
+          <div className="eyebrow mb-3">Follow</div>
+          <div className="flex gap-5 font-display text-lg">
+            <a href="#" className="hover:text-forest">Instagram</a>
+            <a href="#" className="hover:text-forest">TikTok</a>
+            <a href="#" className="hover:text-forest">YouTube</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="bg-night py-16 text-cream">
+      <div className="container-x">
+        <div className="grid gap-10 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <div className="font-display text-3xl md:text-4xl">
+              Sauti Aziz <em className="italic text-gold">Band.</em>
+            </div>
+            <p className="mt-3 max-w-sm text-sm text-cream/60">
+              Precious Voice. Powerful Purpose. From Chuka, Kenya — to the world.
+            </p>
+          </div>
+          <div className="md:col-span-7 grid grid-cols-2 gap-8 sm:grid-cols-3">
+            <FooterCol title="Explore" links={NAV.map(n => [n.label, `#${n.id}`])} />
+            <FooterCol title="Connect" links={[["Instagram","#"],["TikTok","#"],["YouTube","#"],["Spotify","#"]]} />
+            <FooterCol title="Office" links={[["Chuka, Kenya","#"],["press@sautiaziz.com","mailto:press@sautiaziz.com"],["bookings@sautiaziz.com","mailto:bookings@sautiaziz.com"]]} />
+          </div>
+        </div>
+        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-cream/10 pt-8 text-xs text-cream/50 md:flex-row md:items-center">
+          <div>© {new Date().getFullYear()} Sauti Aziz Band. All rights reserved.</div>
+          <div className="tracking-[0.3em] uppercase">Africa · To · The · World</div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function FooterCol({ title, links }: { title: string; links: [string, string][] }) {
+  return (
+    <div>
+      <div className="eyebrow mb-4">{title}</div>
+      <ul className="space-y-2 text-sm">
+        {links.map(([l, href]) => (
+          <li key={l}><a href={href} className="text-cream/75 hover:text-gold">{l}</a></li>
+        ))}
+      </ul>
     </div>
   );
 }
