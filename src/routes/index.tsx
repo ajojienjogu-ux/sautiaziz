@@ -54,21 +54,21 @@ const LEADERSHIP = [
   ["Peter Mukungi", "Disciplinary Officer"],
 ];
 
-const COLLECTIVE = [
-  { name: "Joseph Mwangi", role: "Vocals · Founder", field: "Law" },
-  { name: "Michael Kamau Munyua", role: "Lead Vocals", field: "Communication" },
-  { name: "Peter Mukungi", role: "Vocals · Discipline", field: "Engineering" },
-  { name: "Grace Njoroge Mumbi", role: "Vocals", field: "Commerce" },
-  { name: "Claire Omondi", role: "Vocals", field: "Psychology" },
-  { name: "George Kihara", role: "Instrumentalist", field: "Computer Science" },
-  { name: "Pamelah Shekinah", role: "Vocals", field: "Nursing" },
-  { name: "Samuel Odanga", role: "Vocals · Chair", field: "Economics" },
-  { name: "Catherine Mariba", role: "Vocals", field: "Statistics" },
-  { name: "Joseph Muhia Buya", role: "Music Director", field: "Physics" },
-  { name: "Janice Kipkiror", role: "Vocals", field: "Linguistics" },
-  { name: "Alex Githinji", role: "Vocals · Secretary", field: "Law" },
-  { name: "Cherotich Kilel", role: "Vocals", field: "Psychology" },
-  { name: "Sammy Ogejo", role: "Instrumentalist", field: "Engineering" },
+const COLLECTIVE: { name: string; role: string; field: string; photo?: string }[] = [
+  { name: "Joseph Mwangi", role: "Vocals · Founder", field: "Economics & Statistics" },
+  { name: "Michael Kamau Munyua", role: "Lead Vocals · Guitarist", field: "Business", photo: michaelAsset.url },
+  { name: "Peter Mukungi", role: "Vocals · Rapper · Spoken Word", field: "Computer Science", photo: peterAsset.url },
+  { name: "Grace Njoroge Mumbi", role: "Vocals · Treasurer", field: "Computer Science", photo: graceAsset.url },
+  { name: "Claire Omondi", role: "Tenor Vocals", field: "Psychology" },
+  { name: "George Kihara", role: "Bass Vocals · Rapper", field: "Health Systems & Data", photo: georgeAsset.url },
+  { name: "Pamelah Shekinah", role: "Alto Vocals", field: "Nursing" },
+  { name: "Samuel Odanga", role: "Guitarist · Vocals · Chair", field: "Communication Studies", photo: samuelAsset.url },
+  { name: "Catherine Mariba", role: "Alto / Tenor · Guitarist", field: "Electrical Engineering" },
+  { name: "Joseph Muhia Buya", role: "Music Director · Multi-Instrumentalist", field: "Law", photo: muhiaAsset.url },
+  { name: "Janice Kipkiror", role: "Vocals", field: "Computer Science" },
+  { name: "Alex Kamau", role: "Rapper · Vocals · Secretary", field: "Linguistics & Literature" },
+  { name: "Cherotich Kilel", role: "Vocals", field: "Commerce" },
+  { name: "Sammy Ogejo", role: "Producer · Guitarist · Vocals", field: "Physics", photo: sammyAsset.url },
 ];
 
 const TIMELINE = [
