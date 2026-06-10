@@ -414,16 +414,32 @@ function Collective() {
         {COLLECTIVE.map((m, i) => (
           <article
             key={m.name}
-            className="group relative overflow-hidden bg-background p-6 transition hover:bg-card"
+            className="group relative overflow-hidden bg-background transition hover:bg-card"
           >
-            <div className="flex h-40 items-end">
-              <span className="font-display text-6xl text-forest/15 transition group-hover:text-forest/30">
+            <div className="relative aspect-[4/5] overflow-hidden bg-muted">
+              {m.photo ? (
+                <img
+                  src={m.photo}
+                  alt={m.name}
+                  loading="lazy"
+                  className="h-full w-full object-cover grayscale transition duration-700 group-hover:grayscale-0 group-hover:scale-[1.03]"
+                />
+              ) : (
+                <div className="flex h-full w-full items-end justify-start p-6">
+                  <span className="font-display text-7xl text-forest/15">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+              )}
+              <span className="absolute left-3 top-3 rounded-full bg-night/70 px-2 py-0.5 font-display text-[11px] text-gold">
                 {String(i + 1).padStart(2, "0")}
               </span>
             </div>
-            <h3 className="font-display text-xl">{m.name}</h3>
-            <div className="mt-1 text-xs uppercase tracking-[0.2em] text-gold">{m.role}</div>
-            <div className="mt-3 text-xs text-muted-foreground">Discipline · {m.field}</div>
+            <div className="p-5">
+              <h3 className="font-display text-lg leading-tight">{m.name}</h3>
+              <div className="mt-1 text-[10px] uppercase tracking-[0.2em] text-gold">{m.role}</div>
+              <div className="mt-2 text-xs text-muted-foreground">{m.field}</div>
+            </div>
           </article>
         ))}
       </div>
