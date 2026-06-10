@@ -1,9 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import heroImg from "@/assets/hero.jpg";
-import weaveImg from "@/assets/weave.jpg";
-import stageImg from "@/assets/stage.jpg";
-import vocalistImg from "@/assets/vocalist.jpg";
+import heroAsset from "@/assets/band/hero.jpg.asset.json";
+import logoAsset from "@/assets/band/logo.jpg.asset.json";
+import michaelAsset from "@/assets/band/michael.jpg.asset.json";
+import peterAsset from "@/assets/band/peter.jpg.asset.json";
+import graceAsset from "@/assets/band/grace.jpg.asset.json";
+import georgeAsset from "@/assets/band/george.jpg.asset.json";
+import samuelAsset from "@/assets/band/samuel.jpg.asset.json";
+import muhiaAsset from "@/assets/band/muhia.jpg.asset.json";
+import stage1Asset from "@/assets/band/stage1.jpg.asset.json";
+import sammyAsset from "@/assets/band/sammy.jpg.asset.json";
+import saz1Asset from "@/assets/band/saz1.jpg.asset.json";
+import saz2Asset from "@/assets/band/saz2.jpg.asset.json";
+import heatHeartAsset from "@/assets/band/heatheart.jpg.asset.json";
+
+const heroImg = heroAsset.url;
+const logoImg = logoAsset.url;
+const weaveImg = saz2Asset.url;
+const stageImg = stage1Asset.url;
+const vocalistImg = graceAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -39,21 +54,21 @@ const LEADERSHIP = [
   ["Peter Mukungi", "Disciplinary Officer"],
 ];
 
-const COLLECTIVE = [
-  { name: "Joseph Mwangi", role: "Vocals · Founder", field: "Law" },
-  { name: "Michael Kamau Munyua", role: "Lead Vocals", field: "Communication" },
-  { name: "Peter Mukungi", role: "Vocals · Discipline", field: "Engineering" },
-  { name: "Grace Njoroge Mumbi", role: "Vocals", field: "Commerce" },
-  { name: "Claire Omondi", role: "Vocals", field: "Psychology" },
-  { name: "George Kihara", role: "Instrumentalist", field: "Computer Science" },
-  { name: "Pamelah Shekinah", role: "Vocals", field: "Nursing" },
-  { name: "Samuel Odanga", role: "Vocals · Chair", field: "Economics" },
-  { name: "Catherine Mariba", role: "Vocals", field: "Statistics" },
-  { name: "Joseph Muhia Buya", role: "Music Director", field: "Physics" },
-  { name: "Janice Kipkiror", role: "Vocals", field: "Linguistics" },
-  { name: "Alex Githinji", role: "Vocals · Secretary", field: "Law" },
-  { name: "Cherotich Kilel", role: "Vocals", field: "Psychology" },
-  { name: "Sammy Ogejo", role: "Instrumentalist", field: "Engineering" },
+const COLLECTIVE: { name: string; role: string; field: string; photo?: string }[] = [
+  { name: "Joseph Mwangi", role: "Vocals · Founder", field: "Economics & Statistics" },
+  { name: "Michael Kamau Munyua", role: "Lead Vocals · Guitarist", field: "Business", photo: michaelAsset.url },
+  { name: "Peter Mukungi", role: "Vocals · Rapper · Spoken Word", field: "Computer Science", photo: peterAsset.url },
+  { name: "Grace Njoroge Mumbi", role: "Vocals · Treasurer", field: "Computer Science", photo: graceAsset.url },
+  { name: "Claire Omondi", role: "Tenor Vocals", field: "Psychology" },
+  { name: "George Kihara", role: "Bass Vocals · Rapper", field: "Health Systems & Data", photo: georgeAsset.url },
+  { name: "Pamelah Shekinah", role: "Alto Vocals", field: "Nursing" },
+  { name: "Samuel Odanga", role: "Guitarist · Vocals · Chair", field: "Communication Studies", photo: samuelAsset.url },
+  { name: "Catherine Mariba", role: "Alto / Tenor · Guitarist", field: "Electrical Engineering" },
+  { name: "Joseph Muhia Buya", role: "Music Director · Multi-Instrumentalist", field: "Law", photo: muhiaAsset.url },
+  { name: "Janice Kipkiror", role: "Vocals", field: "Computer Science" },
+  { name: "Alex Kamau", role: "Rapper · Vocals · Secretary", field: "Linguistics & Literature" },
+  { name: "Cherotich Kilel", role: "Vocals", field: "Commerce" },
+  { name: "Sammy Ogejo", role: "Producer · Guitarist · Vocals", field: "Physics", photo: sammyAsset.url },
 ];
 
 const TIMELINE = [
@@ -109,9 +124,8 @@ function Nav() {
     >
       <div className="container-x flex h-16 items-center justify-between md:h-20">
         <a href="#top" className="group flex items-center gap-3">
-          <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-full bg-forest text-cream">
-            <span className="font-display text-lg leading-none">SA</span>
-            <span className="absolute inset-0 rounded-full ring-1 ring-gold/60" />
+          <span className="relative inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-cream ring-1 ring-gold/60">
+            <img src={logoImg} alt="Sauti Aziz logo" className="h-full w-full object-contain p-1" />
           </span>
           <span className="hidden flex-col leading-tight sm:flex">
             <span className="font-display text-base text-foreground">Sauti Aziz</span>
@@ -400,16 +414,32 @@ function Collective() {
         {COLLECTIVE.map((m, i) => (
           <article
             key={m.name}
-            className="group relative overflow-hidden bg-background p-6 transition hover:bg-card"
+            className="group relative overflow-hidden bg-background transition hover:bg-card"
           >
-            <div className="flex h-40 items-end">
-              <span className="font-display text-6xl text-forest/15 transition group-hover:text-forest/30">
+            <div className="relative aspect-[4/5] overflow-hidden bg-muted">
+              {m.photo ? (
+                <img
+                  src={m.photo}
+                  alt={m.name}
+                  loading="lazy"
+                  className="h-full w-full object-cover grayscale transition duration-700 group-hover:grayscale-0 group-hover:scale-[1.03]"
+                />
+              ) : (
+                <div className="flex h-full w-full items-end justify-start p-6">
+                  <span className="font-display text-7xl text-forest/15">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+              )}
+              <span className="absolute left-3 top-3 rounded-full bg-night/70 px-2 py-0.5 font-display text-[11px] text-gold">
                 {String(i + 1).padStart(2, "0")}
               </span>
             </div>
-            <h3 className="font-display text-xl">{m.name}</h3>
-            <div className="mt-1 text-xs uppercase tracking-[0.2em] text-gold">{m.role}</div>
-            <div className="mt-3 text-xs text-muted-foreground">Discipline · {m.field}</div>
+            <div className="p-5">
+              <h3 className="font-display text-lg leading-tight">{m.name}</h3>
+              <div className="mt-1 text-[10px] uppercase tracking-[0.2em] text-gold">{m.role}</div>
+              <div className="mt-2 text-xs text-muted-foreground">{m.field}</div>
+            </div>
           </article>
         ))}
       </div>
@@ -462,10 +492,11 @@ function Timeline() {
 
 function Showcase() {
   const tracks = [
-    { title: "Sina Noma", meta: "Cover · 2023", note: "1M+ engagements" },
-    { title: "Africa To The World", meta: "Live Session · 2024", note: "TV47 Feature" },
-    { title: "Voices of Chuka", meta: "Acoustic · 2024", note: "Studio Session" },
-    { title: "Untitled", meta: "Original · 2025", note: "Coming soon" },
+    { title: "Beautiful", meta: "Heat & Heart EP · 2025", note: "Track 01" },
+    { title: "Energy", meta: "Heat & Heart EP · 2025", note: "Track 02" },
+    { title: "Sherehe", meta: "Heat & Heart EP · 2025", note: "Track 03" },
+    { title: "Steam", meta: "Heat & Heart EP · 2025", note: "Track 04" },
+    { title: "What Is Love", meta: "Heat & Heart EP · 2025", note: "Track 05" },
   ];
   return (
     <section className="bg-night py-24 text-cream md:py-36">
@@ -475,26 +506,40 @@ function Showcase() {
             <div className="eyebrow mb-5">07 — Listen</div>
             <h2 className="font-display text-4xl leading-[1.05] md:text-6xl">Press play. Stay awhile.</h2>
           </div>
-          <a href="#book" className="text-sm text-gold underline-offset-4 hover:underline">Stream on all platforms →</a>
+          <a href="https://www.youtube.com/@sauti_aziz_band" target="_blank" rel="noreferrer" className="text-sm text-gold underline-offset-4 hover:underline">Watch on YouTube →</a>
         </div>
-        <ul className="divide-y divide-cream/10 border-y border-cream/10">
-          {tracks.map((t, i) => (
-            <li key={t.title} className="group flex items-center gap-6 py-6 transition hover:bg-cream/5 md:py-8">
-              <span className="w-12 font-display text-2xl text-gold md:text-3xl">{String(i + 1).padStart(2, "0")}</span>
-              <div className="flex-1">
-                <div className="font-display text-2xl md:text-3xl">{t.title}</div>
-                <div className="mt-1 text-xs uppercase tracking-[0.2em] text-cream/55">{t.meta}</div>
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <div className="relative aspect-square overflow-hidden rounded-sm ring-1 ring-cream/10">
+              <img src={heatHeartAsset.url} alt="Heat & Heart EP cover" loading="lazy" className="h-full w-full object-cover" />
+            </div>
+            <div className="mt-6 flex items-center justify-between">
+              <div>
+                <div className="eyebrow !text-gold-soft">Upcoming EP</div>
+                <div className="font-display text-2xl">Heat & Heart</div>
               </div>
-              <div className="hidden text-sm text-cream/60 sm:block">{t.note}</div>
-              <button
-                aria-label={`Play ${t.title}`}
-                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-cream/30 text-cream transition group-hover:border-gold group-hover:text-gold"
-              >
-                ▶
-              </button>
-            </li>
-          ))}
-        </ul>
+              <div className="text-right text-xs uppercase tracking-[0.2em] text-cream/55">Out 31 June</div>
+            </div>
+          </div>
+          <ul className="divide-y divide-cream/10 border-y border-cream/10 md:col-span-7">
+            {tracks.map((t, i) => (
+              <li key={t.title} className="group flex items-center gap-6 py-6 transition hover:bg-cream/5 md:py-7">
+                <span className="w-10 font-display text-2xl text-gold md:text-3xl">{String(i + 1).padStart(2, "0")}</span>
+                <div className="flex-1">
+                  <div className="font-display text-xl md:text-2xl">{t.title}</div>
+                  <div className="mt-1 text-xs uppercase tracking-[0.2em] text-cream/55">{t.meta}</div>
+                </div>
+                <div className="hidden text-sm text-cream/60 sm:block">{t.note}</div>
+                <button
+                  aria-label={`Play ${t.title}`}
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream/30 text-cream transition group-hover:border-gold group-hover:text-gold"
+                >
+                  ▶
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
