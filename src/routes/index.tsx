@@ -124,9 +124,8 @@ function Nav() {
     >
       <div className="container-x flex h-16 items-center justify-between md:h-20">
         <a href="#top" className="group flex items-center gap-3">
-          <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-full bg-forest text-cream">
-            <span className="font-display text-lg leading-none">SA</span>
-            <span className="absolute inset-0 rounded-full ring-1 ring-gold/60" />
+          <span className="relative inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-cream ring-1 ring-gold/60">
+            <img src={logoImg} alt="Sauti Aziz logo" className="h-full w-full object-contain p-1" />
           </span>
           <span className="hidden flex-col leading-tight sm:flex">
             <span className="font-display text-base text-foreground">Sauti Aziz</span>
