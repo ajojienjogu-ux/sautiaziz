@@ -492,10 +492,11 @@ function Timeline() {
 
 function Showcase() {
   const tracks = [
-    { title: "Sina Noma", meta: "Cover · 2023", note: "1M+ engagements" },
-    { title: "Africa To The World", meta: "Live Session · 2024", note: "TV47 Feature" },
-    { title: "Voices of Chuka", meta: "Acoustic · 2024", note: "Studio Session" },
-    { title: "Untitled", meta: "Original · 2025", note: "Coming soon" },
+    { title: "Beautiful", meta: "Heat & Heart EP · 2025", note: "Track 01" },
+    { title: "Energy", meta: "Heat & Heart EP · 2025", note: "Track 02" },
+    { title: "Sherehe", meta: "Heat & Heart EP · 2025", note: "Track 03" },
+    { title: "Steam", meta: "Heat & Heart EP · 2025", note: "Track 04" },
+    { title: "What Is Love", meta: "Heat & Heart EP · 2025", note: "Track 05" },
   ];
   return (
     <section className="bg-night py-24 text-cream md:py-36">
@@ -505,26 +506,40 @@ function Showcase() {
             <div className="eyebrow mb-5">07 — Listen</div>
             <h2 className="font-display text-4xl leading-[1.05] md:text-6xl">Press play. Stay awhile.</h2>
           </div>
-          <a href="#book" className="text-sm text-gold underline-offset-4 hover:underline">Stream on all platforms →</a>
+          <a href="https://www.youtube.com/@sauti_aziz_band" target="_blank" rel="noreferrer" className="text-sm text-gold underline-offset-4 hover:underline">Watch on YouTube →</a>
         </div>
-        <ul className="divide-y divide-cream/10 border-y border-cream/10">
-          {tracks.map((t, i) => (
-            <li key={t.title} className="group flex items-center gap-6 py-6 transition hover:bg-cream/5 md:py-8">
-              <span className="w-12 font-display text-2xl text-gold md:text-3xl">{String(i + 1).padStart(2, "0")}</span>
-              <div className="flex-1">
-                <div className="font-display text-2xl md:text-3xl">{t.title}</div>
-                <div className="mt-1 text-xs uppercase tracking-[0.2em] text-cream/55">{t.meta}</div>
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <div className="relative aspect-square overflow-hidden rounded-sm ring-1 ring-cream/10">
+              <img src={heatHeartAsset.url} alt="Heat & Heart EP cover" loading="lazy" className="h-full w-full object-cover" />
+            </div>
+            <div className="mt-6 flex items-center justify-between">
+              <div>
+                <div className="eyebrow !text-gold-soft">Upcoming EP</div>
+                <div className="font-display text-2xl">Heat & Heart</div>
               </div>
-              <div className="hidden text-sm text-cream/60 sm:block">{t.note}</div>
-              <button
-                aria-label={`Play ${t.title}`}
-                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-cream/30 text-cream transition group-hover:border-gold group-hover:text-gold"
-              >
-                ▶
-              </button>
-            </li>
-          ))}
-        </ul>
+              <div className="text-right text-xs uppercase tracking-[0.2em] text-cream/55">Out 31 June</div>
+            </div>
+          </div>
+          <ul className="divide-y divide-cream/10 border-y border-cream/10 md:col-span-7">
+            {tracks.map((t, i) => (
+              <li key={t.title} className="group flex items-center gap-6 py-6 transition hover:bg-cream/5 md:py-7">
+                <span className="w-10 font-display text-2xl text-gold md:text-3xl">{String(i + 1).padStart(2, "0")}</span>
+                <div className="flex-1">
+                  <div className="font-display text-xl md:text-2xl">{t.title}</div>
+                  <div className="mt-1 text-xs uppercase tracking-[0.2em] text-cream/55">{t.meta}</div>
+                </div>
+                <div className="hidden text-sm text-cream/60 sm:block">{t.note}</div>
+                <button
+                  aria-label={`Play ${t.title}`}
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream/30 text-cream transition group-hover:border-gold group-hover:text-gold"
+                >
+                  ▶
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
