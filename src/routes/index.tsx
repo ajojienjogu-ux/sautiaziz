@@ -1,9 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import heroImg from "@/assets/hero.jpg";
-import weaveImg from "@/assets/weave.jpg";
-import stageImg from "@/assets/stage.jpg";
-import vocalistImg from "@/assets/vocalist.jpg";
+import heroAsset from "@/assets/band/hero.jpg.asset.json";
+import logoAsset from "@/assets/band/logo.jpg.asset.json";
+import michaelAsset from "@/assets/band/michael.jpg.asset.json";
+import peterAsset from "@/assets/band/peter.jpg.asset.json";
+import graceAsset from "@/assets/band/grace.jpg.asset.json";
+import georgeAsset from "@/assets/band/george.jpg.asset.json";
+import samuelAsset from "@/assets/band/samuel.jpg.asset.json";
+import muhiaAsset from "@/assets/band/muhia.jpg.asset.json";
+import stage1Asset from "@/assets/band/stage1.jpg.asset.json";
+import sammyAsset from "@/assets/band/sammy.jpg.asset.json";
+import saz1Asset from "@/assets/band/saz1.jpg.asset.json";
+import saz2Asset from "@/assets/band/saz2.jpg.asset.json";
+import heatHeartAsset from "@/assets/band/heatheart.jpg.asset.json";
+
+const heroImg = heroAsset.url;
+const logoImg = logoAsset.url;
+const weaveImg = saz2Asset.url;
+const stageImg = stage1Asset.url;
+const vocalistImg = graceAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
