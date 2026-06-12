@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useMotionSystem } from "@/hooks/use-motion-system";
+
 import heroAsset from "@/assets/band/hero.jpg.asset.json";
 import logoAsset from "@/assets/band/logo.jpg.asset.json";
 import michaelAsset from "@/assets/band/michael.jpg.asset.json";
