@@ -15,7 +15,7 @@ export function useMotionSystem() {
 
     // Auto-tag inner targets of every motion section as `.reveal` with stagger
     const sections = document.querySelectorAll<HTMLElement>(
-      "section[data-section], .reveal-section"
+      "main section, .reveal-section"
     );
     sections.forEach((section) => {
       const targets = section.querySelectorAll<HTMLElement>(
