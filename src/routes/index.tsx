@@ -185,35 +185,44 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative isolate min-h-dvh overflow-hidden bg-night text-cream">
+    <section
+      id="top"
+      data-section="hero"
+      className="relative isolate min-h-dvh overflow-hidden bg-night text-cream"
+    >
       <img
         src={heroImg}
         alt="Sauti Aziz Band performing on stage in warm stage light"
         width={1920}
         height={1080}
         fetchPriority="high"
-        className="absolute inset-0 h-full w-full object-cover opacity-70"
+        data-parallax="0.12"
+        className="absolute inset-0 h-full w-full scale-110 object-cover opacity-70"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-night/70 via-night/40 to-night" />
-      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-night to-transparent" />
+      <div
+        data-parallax="0.05"
+        className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-night to-transparent"
+      />
 
       <div className="container-x relative z-10 flex min-h-dvh flex-col justify-between pb-12 pt-32 md:pt-40">
-        <div className="flex items-center gap-3 animate-rise">
+        <div className="hero-anim no-reveal flex items-center gap-3">
           <span className="h-px w-10 bg-gold" />
           <span className="eyebrow !text-gold-soft">Chuka, Kenya · Est. 2021</span>
         </div>
 
-        <div className="max-w-5xl animate-rise" style={{ animationDelay: "0.15s" }}>
+        <div className="max-w-5xl">
           <h1 className="font-display text-[clamp(3rem,10vw,9rem)] leading-[0.92] tracking-tight">
-            Precious <em className="italic text-gold">Voice.</em>
-            <br />
-            Powerful Purpose.
+            <span className="hero-anim no-reveal block">
+              Precious <em className="italic text-gold">Voice.</em>
+            </span>
+            <span className="hero-anim no-reveal block">Powerful Purpose.</span>
           </h1>
-          <p className="mt-8 max-w-xl text-base text-cream/75 md:text-lg">
+          <p className="hero-anim no-reveal mt-8 max-w-xl text-base text-cream/75 md:text-lg">
             Fourteen voices. One sound. A Kenyan Afro-Fusion collective bringing
             music, story and movement from Africa to the world.
           </p>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+          <div className="hero-anim no-reveal mt-10 flex flex-wrap items-center gap-4">
             <a
               href="#sound"
               className="group inline-flex items-center gap-3 rounded-full bg-gold px-7 py-4 text-sm font-medium text-night transition hover:bg-gold-soft"
@@ -233,7 +242,7 @@ function Hero() {
           </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-2 gap-6 border-t border-cream/15 pt-8 sm:grid-cols-4">
+        <div className="hero-anim no-reveal mt-16 grid grid-cols-2 gap-6 border-t border-cream/15 pt-8 sm:grid-cols-4">
           {[
             ["14", "Voices"],
             ["1M+", "Engagements"],
@@ -250,6 +259,7 @@ function Hero() {
     </section>
   );
 }
+
 
 function Marquee() {
   const words = ["Africa To The World", "Precious Voice", "Powerful Purpose", "Sauti Aziz", "Afro-Fusion", "Chuka · Kenya"];
