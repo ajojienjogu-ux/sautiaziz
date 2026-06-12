@@ -87,6 +87,7 @@ const TIMELINE = [
 const GENRES = ["Afrobeat", "Afro Soul", "Afro Fusion", "Acoustic", "R&B", "Spoken Word", "Contemporary African Pop", "Amapiano"];
 
 function Index() {
+  useMotionSystem();
   return (
     <div className="min-h-dvh bg-background text-foreground">
       <Nav />
@@ -108,6 +109,7 @@ function Index() {
     </div>
   );
 }
+
 
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
